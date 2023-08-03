@@ -35,7 +35,6 @@ ALLOWED_HOSTS = config(
     default="*",
 )
 
-COMINGSOON = config("COMINGSOON", cast=bool, default=False)
 
 
 # Application definition
@@ -50,11 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "website",
-    "rest_framework",
-    "rest_framework.authtoken",
-    "django_filters",
-    "drf_yasg",
-    "corsheaders",
+
 ]
 
 
@@ -63,7 +58,6 @@ SITE_ID = config("SITE_ID", cast=int, default=1)
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -168,27 +162,6 @@ if config("ENABLE_WHITENOISE", cast=bool, default=False):
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# messages configuration for notification handeling in pages
-MESSAGE_TAGS = {
-    messages.DEBUG: "info",
-    messages.INFO: "info",
-    messages.SUCCESS: "success",
-    messages.WARNING: "warning",
-    messages.ERROR: "danger",
-}
-
-
-# Email Configurations for production and development
-EMAIL_BACKEND = config(
-    "EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
-)
-EMAIL_HOST = config("EMAIL_HOST", default="smtp4dev")
-EMAIL_PORT = int(config("EMAIL_PORT", default=25))
-EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
-EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool, default=False)
-EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool, default=False)
-DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="info@example.com")
 
 
 # security configs for production
@@ -210,40 +183,6 @@ if config("USE_SSL_CONFIG", cast=bool, default=False):
     SECURE_REFERRER_POLICY = "strict-origin"
     USE_X_FORWARDED_HOST = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",
-    ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.BasicAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    ],
-}
-if config("DISABLE_BROWSEABLE_API", cast=bool, default=False):
-    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = (
-        "rest_framework.renderers.JSONRenderer",
-    )
-
-
-# cors headers config
-CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:8000",
-#     "http://127.0.0.1:8000",
-# ]
-
-# swagger configs
-SHOW_SWAGGER = config("SHOW_SWAGGER", cast=bool, default=True)
-SWAGGER_SETTINGS = {
-    "USE_SESSION_AUTH": False,
-    "SECURITY_DEFINITIONS": {
-        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
-    },
-    "REFETCH_SCHEMA_ON_LOGOUT": True,
-    "JSON_EDITOR": True,
-}
 
 
 # django debug toolbar for docker usage
