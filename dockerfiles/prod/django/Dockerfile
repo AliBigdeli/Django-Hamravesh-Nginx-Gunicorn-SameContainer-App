@@ -21,7 +21,12 @@ COPY ./core .
 # Configure Nginx
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
+
 EXPOSE 80
+
+
+# copy entrypoint
+COPY ./dockerfiles/prod/django/entrypoint.sh .
 
 # make our entrypoint.sh executable
 RUN chmod +x ./entrypoint.sh
