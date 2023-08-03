@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_yasg",
     "corsheaders",
+    "compressor",
 ]
 
 
@@ -148,12 +149,12 @@ USE_TZ = True
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_ROOT = BASE_DIR / "media"
 
 
 STATICFILES_DIRS = [
-    BASE_DIR / "staticfiles",
+    BASE_DIR / "static",
 ]
 
 # production whitenoise
@@ -283,3 +284,27 @@ if SENTRY_ENABLE == True:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True,
     )
+
+
+# Compress Configs
+COMPRESS_ENABLED = config("COMPRESS_ENABLED", cast=bool, default=False)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
+
+# COMPRESS_REBUILD_TIMEOUT= 86400
+
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
+]
+if config("COMPRESS_GZIP_ENABLED", cast=bool, default=False):
+    COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+    STATICFILES_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
