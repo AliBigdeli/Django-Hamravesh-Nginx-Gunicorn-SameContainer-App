@@ -290,22 +290,22 @@ if SENTRY_ENABLE == True:
 COMPRESS_ENABLED = config("COMPRESS_ENABLED", cast=bool, default=False)
 COMPRESS_OFFLINE = config("COMPRESS_OFFLINE", cast=bool, default=True)
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
-    'compressor.finders.CompressorFinder',
-)
+if COMPRESS_ENABLED:
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        # other finders..
+        'compressor.finders.CompressorFinder',
+    )
 
 
-# COMPRESS_REBUILD_TIMEOUT= 86400
+    # COMPRESS_REBUILD_TIMEOUT= 86400
 
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.cssmin.CSSMinFilter'
-]
-COMPRESS_JS_FILTERS = [
-    'compressor.filters.jsmin.JSMinFilter'
-]
+    COMPRESS_CSS_FILTERS = [
+        'compressor.filters.cssmin.CSSMinFilter'
+    ]
+    COMPRESS_JS_FILTERS = [
+        'compressor.filters.jsmin.JSMinFilter'
+    ]
 if config("COMPRESS_GZIP_ENABLED", cast=bool, default=False):
     COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-    STATICFILES_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
