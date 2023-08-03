@@ -288,6 +288,7 @@ if SENTRY_ENABLE == True:
 
 # Compress Configs
 COMPRESS_ENABLED = config("COMPRESS_ENABLED", cast=bool, default=False)
+COMPRESS_OFFLINE = config("COMPRESS_OFFLINE", cast=bool, default=True)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
