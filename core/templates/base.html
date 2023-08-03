@@ -1,5 +1,5 @@
 {% load static %}
-{% load compress %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ali Bigdeli Django 3.2 Template</title>
-    {% compress css %}
+
     <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
-    {% endcompress %}
+
 
     {% block extra_css %}
     {% endblock %}
@@ -57,9 +57,9 @@
     </div>
     {% include 'messages.html' %}
 </body>
-    {% compress js %}
+
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    {% endcompress %}
+
 {% block extra_js %}
 {% endblock %}
 

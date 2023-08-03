@@ -13,7 +13,7 @@ drf-yasg[validation]
 django-cors-headers
 django-robots
 django-debug-toolbar
-django-compressor
+
 
 # deployment module
 gunicorn
