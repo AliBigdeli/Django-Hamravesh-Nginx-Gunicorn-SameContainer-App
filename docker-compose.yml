@@ -26,8 +26,6 @@ services:
       - ./core:/usr/src/app
     ports:
       - 8000:8000
-    env_file:
-      - ./envs/dev/django/.env
     restart: always
     depends_on:
       - db
