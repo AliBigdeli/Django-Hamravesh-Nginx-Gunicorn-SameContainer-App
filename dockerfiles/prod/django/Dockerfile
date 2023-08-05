@@ -21,7 +21,7 @@ COPY ./core .
 # Configure Nginx
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
-
+# exposing nginx port
 EXPOSE 80
 
 
