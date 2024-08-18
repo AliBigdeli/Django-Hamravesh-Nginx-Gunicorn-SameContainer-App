@@ -19,7 +19,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY ./core .
 
 # Configure Nginx
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./dockerfiles/prod/django/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # exposing nginx port
 EXPOSE 80
